@@ -5,7 +5,7 @@ from sympy import symbols, init_printing, solveset, Eq, linsolve, FiniteSet
 from sym import genEq2, solve, getSimpleEq2
 from sympy.printing.mathml import print_mathml, mathml
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='static')
 
 
 @app.route('/')
@@ -22,7 +22,19 @@ def hello_world():
              mathml(eq2, printer="presentation") +
              "</mtable></mfenced>")
 
+    sol1 = solveset(eq1, x)
+    sol1f = tuple(sol1)[0] or 1
+    int1 = 0
+
+    sol2 = solveset(eq2, y)
+    sol2f = tuple(sol2)[0] or 1
+    int2 = 0
+
     return render_template('2eq.html', eq=eq,
+    					   eq1=str(sol1f),
+    					   eq2=str(sol2f),
+    					   int1=int1,
+    					   int2=int2,
                            val_x=show_val(val_x),
                            val_y=show_val(val_y))
 

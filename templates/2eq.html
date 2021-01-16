@@ -1,19 +1,57 @@
 <!doctype html>
 <html>
 <head>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        * {box-sizing: border-box}
-    </style>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<style>
+		* {
+			box-sizing: border-box
+		}
+	</style>
 </head>
-<body>
-<div style="font-size: xx-large; margin: 3em auto; max-width: 800px">
-    <div style="float: right; border-left: dashed 2px silver; padding-left: 1em">
-        <div>x = {{ val_x|safe }}</div>
-        <div>y = {{ val_y|safe }}</div>
-    </div>
-    {{ eq|safe }}
+<body style="max-width: 800px; margin: 2em auto;">
+<div style="font-size: xx-large;">
+	<div style="clear: both; margin-bottom: 3em">
+		<div style="float: right; border-left: dashed 2px silver; padding-left: 1em">
+			<div>x = {{ val_x|safe }}</div>
+			<div>y = {{ val_y|safe }}</div>
+		</div>
+		<div>{{ eq|safe }}</div>
+		<script>var fun1 = (y) => {
+			{
+				eq1
+			}
+		}</script>
+		<script>var fun2 = (x) => {
+			{
+				eq2
+			}
+		}</script>
+	</div>
+	<div>
+		<svg width="10" height="10" version="1.1"
+			 style="background-color:#fff"
+			 id="svg" xmlns="http://www.w3.org/2000/svg">
+
+		</svg>
+		<script type="text/javascript" src="graph-calc.js"></script>
+		<script>
+			setTimeout(() => {
+				setCanvasSize(800, 500)
+				var opts = {doEqualizeAxes: true, doDrawAxes: true}
+				drawFn(-10, 10, -10, 10, opts, function (x) {
+					return fun1(x)
+				})
+				drawFn(-10, 10, -10, 10, opts, function (x) {
+					return fun2(x)
+				})
+			});
+		</script>
+	</div>
 </div>
+<hr/>
+<footer>
+	&copy; 2021 <a href="https://github.com/spidgorny/equation-generator/">spidgorny</a>
+</footer>
 </body>
 </html>

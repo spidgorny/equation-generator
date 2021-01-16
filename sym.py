@@ -7,20 +7,20 @@ from sympy.logic.boolalg import BooleanFalse
 init_printing(use_unicode=True)
 
 
-def getEq(x: Symbol):
+def getEq(x: Symbol, y: Symbol):
     range = 100
     a = random.randint(-range, range)
     b = random.randint(-range, range)
     c = random.randint(-range, range)
-    eq1 = Eq(a * x + b, c)
+    eq1 = Eq(a * x + b * y, c)
     return eq1
 
 
 def genEq2(x: Symbol, y: Symbol):
     while True:
         try:
-            eq1 = getEq(x)
-            eq2 = getEq(y)
+            eq1 = getEq(x, y)
+            eq2 = getEq(x, y)
             print('⎧ ', eq1)
             print('⎨')
             print('⎩ ', eq2)
