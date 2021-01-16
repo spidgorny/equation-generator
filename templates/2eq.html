@@ -3,12 +3,15 @@
 <head>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {box-sizing: border-box}
+    </style>
 </head>
 <body>
-<div style="font-size: xx-large">
-    <div style="float: right; border-left: dashed 2px silver">
-        <p>{{ val_x|safe }}</p>
-        <p>{{ val_y|safe }}</p>
+<div style="font-size: xx-large; margin: 3em auto; max-width: 800px">
+    <div style="float: right; border-left: dashed 2px silver; padding-left: 1em">
+        <div>x = {{ val_x|safe }}</div>
+        <div>y = {{ val_y|safe }}</div>
     </div>
     {{ eq|safe }}
 </div>

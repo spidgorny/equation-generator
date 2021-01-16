@@ -2,7 +2,7 @@ from html import escape
 
 from flask import Flask, render_template
 from sympy import symbols, init_printing, solveset, Eq, linsolve, FiniteSet
-from sym import genEq2, solve
+from sym import genEq2, solve, getSimpleEq2
 from sympy.printing.mathml import print_mathml, mathml
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     x, y = symbols('x y')
-    eq1, eq2 = genEq2(x, y)
+    eq1, eq2 = getSimpleEq2(x, y)
     res: FiniteSet = solve(eq1, eq2, x, y)
 
     val_x = tuple(res)[0][0]
