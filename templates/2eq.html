@@ -11,7 +11,7 @@
 </head>
 <body style="max-width: 800px; margin: 2em auto;">
 <div style="font-size: xx-large;">
-	<div style="clear: both; margin-bottom: 3em">
+	<div style="clear: both; margin-bottom: 2em">
 		<div style="float: right; border-left: dashed 2px silver; padding-left: 1em">
 			<div>x = {{ val_x|safe }}</div>
 			<div>y = {{ val_y|safe }}</div>
@@ -19,12 +19,12 @@
 		<div>{{ eq|safe }}</div>
 		<script>var fun1 = (y) => {
 			{
-				eq1
+				return {{eq1}}
 			}
 		}</script>
 		<script>var fun2 = (x) => {
 			{
-				eq2
+				return {{eq2}}
 			}
 		}</script>
 	</div>
@@ -38,15 +38,24 @@
 		<script>
 			setTimeout(() => {
 				setCanvasSize(800, 500)
-				var opts = {doEqualizeAxes: true, doDrawAxes: true}
-				drawFn(-10, 10, -10, 10, opts, function (x) {
+				var opts = {doEqualizeAxes: false, doDrawAxes: true}
+				var r = 5
+				drawFn(-r, r, -r, r, opts, function (x) {
 					return fun1(x)
 				})
-				drawFn(-10, 10, -10, 10, opts, function (x) {
+				drawFn(-r, r, -r, r, opts, function (x) {
 					return fun2(x)
 				})
 			});
 		</script>
+	</div>
+	<div style="margin: 1em auto">
+		<div>
+			x = f(y) = {{eq1}}
+		</div>
+		<div>
+			y = f(x) = {{eq2}}
+		</div>
 	</div>
 </div>
 <hr/>

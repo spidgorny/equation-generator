@@ -43,7 +43,7 @@ def getSimpleEq2(x: Symbol, y: Symbol):
         res = solve(eq1, eq2, x, y)
         val_x = tuple(res)[0][0]
         val_y = tuple(res)[0][1]
-        print(type(val_x), type(val_y))
+#         print(type(val_x), type(val_y))
         rat = 1 if isinstance(val_x, sympy.core.numbers.Integer) else 0
         rat += 1 if isinstance(val_y, sympy.core.numbers.Integer) else 0
         if rat > 0:
