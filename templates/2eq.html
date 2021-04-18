@@ -40,10 +40,10 @@
 				setCanvasSize(800, 500)
 				var opts = {doEqualizeAxes: false, doDrawAxes: true}
 				var r = 5
-				drawFn(-r, r, -r, r, opts, function (x) {
+				drawFn(-r, r, -r, r, {...opts, color: '#f66'}, function (x) {
 					return fun1(x)
 				})
-				drawFn(-r, r, -r, r, opts, function (x) {
+				drawFn(-r, r, -r, r, {...opts, color: '#5f5'}, function (x) {
 					return fun2(x)
 				})
 			});

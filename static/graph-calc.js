@@ -8,7 +8,10 @@
 var svg = document.getElementById('svg');
 var svgNS = svg.namespaceURI;
 var lightStyle = { stroke: '#ddd', fill: 'transparent', 'stroke-width': 3 };
-var darkStyle = { stroke: '#666', fill: 'transparent', 'stroke-width': 3 };
+var darkStyle = function (color) {
+    if (color === void 0) { color = '#666'; }
+    return ({ stroke: color, fill: 'transparent', 'stroke-width': 3 });
+};
 var xSize;
 var ySize;
 var numFnPts = 300;
@@ -72,8 +75,10 @@ function drawFn(xMin, xMax, yMin, yMax, opts, fn) {
         var rightPt = canvasPtFromXY(xMax, 0);
         if (0 <= leftPt[1] && leftPt[1] < ySize) {
             var xAxis = add('line', lightStyle);
-            addAttributes(xAxis, { x1: leftPt[0], y1: leftPt[1],
-                x2: rightPt[0], y2: rightPt[1] });
+            addAttributes(xAxis, {
+                x1: leftPt[0], y1: leftPt[1],
+                x2: rightPt[0], y2: rightPt[1]
+            });
             for (var x = Math.ceil(xMin); x <= Math.floor(xMax); x++) {
                 var p = canvasPtFromXY(x, 0);
                 drawTickAroundPt(p, 1); // 1 == vertical tick
@@ -84,8 +89,10 @@ function drawFn(xMin, xMax, yMin, yMax, opts, fn) {
         var topPt = canvasPtFromXY(0, yMax);
         if (0 <= botPt[0] && botPt[0] < xSize) {
             var yAxis = add('line', lightStyle);
-            addAttributes(yAxis, { x1: botPt[0], y1: botPt[1],
-                x2: topPt[0], y2: topPt[1] });
+            addAttributes(yAxis, {
+                x1: botPt[0], y1: botPt[1],
+                x2: topPt[0], y2: topPt[1]
+            });
             for (var y = Math.ceil(yMin); y <= Math.floor(yMax); y++) {
                 var p = canvasPtFromXY(0, y);
                 drawTickAroundPt(p, 0); // 0 == horizontal tick
@@ -115,6 +122,6 @@ function drawFn(xMin, xMax, yMin, yMax, opts, fn) {
             prevCanvasY = canvasPt[1];
         } while (x < xTarget);
     }
-    var polyline = add('polyline', darkStyle);
+    var polyline = add('polyline', opts.color ? darkStyle(opts.color) : darkStyle());
     addAttributes(polyline, { points: pts.join(' ') });
 }
